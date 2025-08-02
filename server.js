@@ -7,14 +7,13 @@ const bcrypt = require('bcrypt');
 const { Telegraf } = require('telegraf');
 const dotenv = require('dotenv');
 
-
 dotenv.config();
 
 const app = express();
 const server = http.createServer(app);
 const io = socketIo(server, {
   cors: {
-    origin: '*', // Frontend URL’ni qo‘ying (masalan, https://your-frontend.onrender.com)
+    origin: '*',
     methods: ['GET', 'POST']
   }
 });
@@ -33,9 +32,9 @@ app.use(session({
 mongoose.connect(process.env.MONGO_URI, {
   useNewUrlParser: true,
   useUnifiedTopology: true,
-  serverSelectionTimeoutMS: 30000, // 30 soniya
-  socketTimeoutMS: 45000, // 45 soniya
-  autoIndex: false // Render’da indekslashni o‘chirish
+  serverSelectionTimeoutMS: 30000,
+  socketTimeoutMS: 45000,
+  autoIndex: false
 })
 .then(() => console.log('MongoDB ga ulanish muvaffaqiyatli, vaqt:', new Date().toISOString()))
 .catch((err) => console.error('MongoDB ulanish xatosi:', err.message, 'vaqt:', new Date().toISOString()));
@@ -46,19 +45,26 @@ bot.start((ctx) => ctx.reply('Salom! Bot ishga tushdi! /help uchun yozing.'));
 bot.help((ctx) => ctx.reply('Bu chat bot. /start - boshlash, /help - yordam.'));
 bot.launch();
 
-// Webhook uchun
+// Webhook
 app.post(`/bot${process.env.BOT_TOKEN}`, (req, res) => {
   bot.processUpdate(req.body);
   res.sendStatus(200);
 });
 
-// Socket.IO ulanishi
+// Socket.io
 io.on('connection', (socket) => {
   console.log('Foydalanuvchi ulandi:', socket.id);
 
   socket.on('chat message', (msg) => {
-    io.emit('chat message', { username: socket.handshake.session?.user?.username || 'Anonim', message: msg });
-    bot.telegram.sendMessage(process.env.CHAT_ID || '', `${socket.handshake.session?.user?.username || 'Anonim'}: ${msg}`);
+    io.emit('chat message', {
+      username: socket.handshake.session?.user?.username || 'Anonim',
+      message: msg
+    });
+
+    bot.telegram.sendMessage(
+      process.env.CHAT_ID || '',
+      `${socket.handshake.session?.user?.username || 'Anonim'}: ${msg}`
+    );
   });
 
   socket.on('disconnect', () => {
@@ -66,7 +72,7 @@ io.on('connection', (socket) => {
   });
 });
 
-// Login router
+// Login
 app.post('/login', async (req, res) => {
   try {
     const { username, password } = req.body;
@@ -82,7 +88,7 @@ app.post('/login', async (req, res) => {
   }
 });
 
-// Logout router
+// Logout
 app.get('/logout', (req, res) => {
   req.session.destroy((err) => {
     if (err) return res.status(500).send('Chiqishda xatolik');
@@ -90,21 +96,21 @@ app.get('/logout', (req, res) => {
   });
 });
 
-// Port sozlamasi
+// ✅ Bosh sahifa yo‘li (http://your-app.onrender.com/)
+app.get('/', (req, res) => {
+  res.send('✅ Bot va server ishlayapti!');
+});
+
+// Port
 const PORT = process.env.PORT || 3000;
 server.listen(PORT, '0.0.0.0', () => {
   console.log(`Server ${PORT} portida ishga tushdi, vaqt:`, new Date().toISOString());
 });
 
-// Har 5 daqiqada ulanish holatini tekshirish
+// MongoDB ping har 5 daqiqada
 setInterval(() => {
   mongoose.connection.db.admin().ping((err, result) => {
     if (err) console.error('Ping xatosi:', err.message, 'vaqt:', new Date().toISOString());
     else console.log('MongoDB ping muvaffaqiyatli:', new Date().toISOString());
   });
-}, 300000); // 5 daqiqa
-
-
-
-
-
+}, 300000);
