@@ -7,6 +7,11 @@ const bcrypt = require('bcrypt');
 const Telegraf = require('telegraf');
 const dotenv = require('dotenv');
 
+
+
+const { Telegraf } = require('telegraf');
+const bot = new Telegraf(process.env.BOT_TOKEN);
+
 dotenv.config();
 
 const app = express();
