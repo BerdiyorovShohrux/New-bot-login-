@@ -13,7 +13,7 @@ const app = express();
 const server = http.createServer(app);
 const io = socketIo(server, {
   cors: {
-    origin: '*', // Frontend URL’ni qo‘ying (masalan, https://your-frontend.onrender.com)
+    origin: 'https://new-bot-login.onrender.com', // Frontend URL’ni qo‘ying (masalan, https://your-frontend.onrender.com)
     methods: ['GET', 'POST']
   }
 });
@@ -102,3 +102,4 @@ setInterval(() => {
     else console.log('MongoDB ping muvaffaqiyatli:', new Date().toISOString());
   });
 }, 300000); // 5 daqiqa
+
