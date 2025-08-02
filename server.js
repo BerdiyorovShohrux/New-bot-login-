@@ -8,8 +8,6 @@ const Telegraf = require('telegraf');
 const dotenv = require('dotenv');
 
 
-const bot = new Telegraf(process.env.BOT_TOKEN);
-
 dotenv.config();
 
 const app = express();
@@ -105,6 +103,7 @@ setInterval(() => {
     else console.log('MongoDB ping muvaffaqiyatli:', new Date().toISOString());
   });
 }, 300000); // 5 daqiqa
+
 
 
 
