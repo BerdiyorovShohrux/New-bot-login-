@@ -1,0 +1,236 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Glassmorphism Login Form</title>
+    <link rel="preconnect" href="https://fonts.gstatic.com" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css" />
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;500;600&display=swap" rel="stylesheet" />
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Poppins', sans-serif;
+        }
+
+        body {
+            min-height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            position: relative;
+            overflow: hidden;
+        }
+
+        body::before {
+            content: "";
+            position: absolute;
+            top: 0;
+            left: 0;
+            height: 100%;
+            width: 100%;
+            background-image: url('rasm/retouch_2024050421541036.jpg');
+            background-size: cover;
+            background-position: center;
+            background-repeat: no-repeat;
+            filter: blur(2px);
+            z-index: -1;
+        }
+
+        form {
+            width: 400px;
+            background-color: rgba(255, 255, 255, 0.13);
+            border-radius: 10px;
+            backdrop-filter: blur(10px);
+            border: 2px solid rgba(255, 255, 255, 0.1);
+            box-shadow: 0 0 40px rgba(8, 7, 16, 0.6);
+            padding: 40px 30px;
+            color: #fff;
+            position: relative;
+            z-index: 1;
+        }
+
+        form h3 {
+            font-size: 30px;
+            line-height: 38px;
+            text-align: center;
+            margin-bottom: 35px;
+            text-shadow: #000 1px 1px 5px;
+            font-weight: bolder;
+        }
+
+        label {
+            display: block;
+            margin-top: 20px;
+            font-size: 16px;
+            font-weight: 500;
+        }
+
+        input {
+            height: 50px;
+            width: 100%;
+            background-color: rgba(255, 255, 255, 0.07);
+            border-radius: 5px;
+            padding: 0 12px;
+            margin-top: 8px;
+            font-size: 14px;
+            color: #fff;
+            border: none;
+            outline: none;
+            transition: all 0.3s ease;
+        }
+
+        input:focus {
+            background-color: rgba(255, 255, 255, 0.2);
+            box-shadow: 0 0 10px rgba(255, 255, 255, 0.2);
+        }
+
+        ::placeholder {
+            color: #ffffff;
+        }
+
+        button {
+            margin-top: 30px;
+            width: 100%;
+            background-color: #ffffff;
+            color: #080710;
+            padding: 14px 0;
+            font-size: 18px;
+            font-weight: 600;
+            border-radius: 5px;
+            cursor: pointer;
+            border: none;
+            transition: all 0.3s ease;
+        }
+
+        button:hover {
+            background-color: #f0f0f0;
+            transform: translateY(-2px);
+        }
+
+        button:active {
+            background-color: #464646;
+            color: #ffffff;
+            transform: translateY(0);
+        }
+
+        @media (max-width: 768px) {
+            form {
+                width: 90%;
+                max-width: 360px;
+                padding: 30px 20px;
+            }
+
+            form h3 {
+                font-size: 26px;
+                line-height: 30px;
+            }
+
+            input,
+            button {
+                height: 46px;
+                font-size: 15px;
+            }
+        }
+
+        @media (max-width: 480px) {
+            form {
+                width: 95%;
+                max-width: 320px;
+                padding: 25px 15px;
+            }
+
+            form h3 {
+                font-size: 22px;
+                line-height: 26px;
+            }
+
+            input,
+            button {
+                height: 44px;
+                font-size: 14px;
+            }
+
+            label {
+                font-size: 14px;
+                margin-top: 15px;
+            }
+        }
+    </style>
+</head>
+
+<body>
+    <form id="loginForm">
+        <h3>MAKTABIMDAGI XOTIRALARIM</h3>
+        <label for="username">Foydalanuvchi nomi</label>
+        <input type="text" placeholder="Foydalanuvchi nomini kiriting:" id="username" />
+        <label for="password">Parol</label>
+        <input type="password" placeholder="Parolni kiriting:" id="password" />
+        <button type="submit">Log In</button>
+    </form>
+
+    <script>
+        const users = {
+            "Abbos_Abduhalilov": { password: "ABBOS1234" },
+            "Sevinch_Abilqosimova": { password: "Seva5678" },
+            "Sevinch_Akromova": { password: "Sevinchoy9101" },
+            "Aziz_Ahmatov": { password: "Aziz1213" },
+            "Aziz_Asatullayev": { password: "Aziz1415" },
+            "Nodir_Baqoyev": { password: "Nodir_1617" },
+            "Shohrux_Berdiyorov": { password: "Shohrux777" },
+            "Nodira_Erkinova": { password: "Nodira1819" },
+            "Kamol_Fayziqulov": { password: "Kamol2021" },
+            "Fayoz_Jumaboyev": { password: "Fayoz2223" },
+            "Sevinch Keldiboyeva": { password: "Sevgi12_07" },
+            "Parizod_Nasimova": { password: "Parizod2425" },
+            "Orziqulov_Jamshid": { password: "Jamshid2627" },
+            "Samandar_Ochilov": { password: "Samandar2728" },
+            "Samandar_Olimov": { password: "Samandar_2930" },
+            "Azamat_Rahmatov": { password: "Azamat3132" },
+            "Sabina_Rashidova": { password: "Sabina3334" },
+            "Sabina_Sunnatullayeva": { password: "Sabina3536" },
+            "Xadicha_Tojimurodova": { password: "Xadicha3738" },
+            "Muslim_Tojimurodov": { password: "Muslim3940" },
+            "Bunyod_Gaybullayev": { password: "Bunyod2510" },
+            "Islom_Ganiyev": { password: "Islom4142" },
+            "Abdulloh_Nurillayev": { password: "Abdulloh4344" },
+            "Asil_Nishonov": { password: "Asil4344" },
+            "jahongir_Juraqulov": { password: "JahongirJR4546" },
+            "Nargiza_Ummatqulova": { password: "Nargiz4748" },
+        };
+
+        document.getElementById('loginForm').addEventListener('submit', async function (event) {
+            event.preventDefault();
+            const username = document.getElementById('username').value.trim();
+            const password = document.getElementById('password').value.trim();
+
+            if (!username || !password) {
+                alert('Iltimos, barcha maydonlarni to‘ldiring!');
+                return;
+            }
+
+            try {
+                const response = await fetch('/login', {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify({ username, password })
+                });
+                const data = await response.json();
+                if (response.ok) {
+                    sessionStorage.setItem('currentUser', username);
+                    window.location.href = 'index1.html';
+                } else {
+                    alert(data.message || 'Login yoki parol xato!');
+                }
+            } catch (err) {
+                console.error('Login error:', err);
+                alert('Xato yuz berdi, qayta urinib ko‘ring.');
+            }
+        });
+    </script>
+</body>
+
+</html>
