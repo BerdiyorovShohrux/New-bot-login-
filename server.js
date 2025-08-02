@@ -4,7 +4,7 @@ const socketIo = require('socket.io');
 const mongoose = require('mongoose');
 const session = require('express-session');
 const bcrypt = require('bcrypt');
-const Telegraf = require('telegraf');
+const { Telegraf } = require('telegraf');
 const dotenv = require('dotenv');
 
 
@@ -103,6 +103,7 @@ setInterval(() => {
     else console.log('MongoDB ping muvaffaqiyatli:', new Date().toISOString());
   });
 }, 300000); // 5 daqiqa
+
 
 
 
